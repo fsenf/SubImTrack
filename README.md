@@ -25,5 +25,11 @@ python3 -m venv python_env
 source python_env/bin/activate
 ```
 
+* install dependencies
+```bash
+pip install numpy matplotlib xarray Image
+```
+
+
 
 ## Getting Started
