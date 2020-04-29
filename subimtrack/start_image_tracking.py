@@ -1,37 +1,49 @@
-#!/usr/bin/env python
+#!/usr/bin/env ipython
 
 import sys, os, glob
 import numpy as np
 import pylab as pl
 
-import ImageTracking
-from ImageTracking import ImageTracking
+from .ImageTracking import ImageTracking
 from PIL import Image
 
 ######################################################################
 ######################################################################
 
 
+def run( config, fname ):
+    '''
+    Run the ImageTracking Class.
 
-if __name__ == '__main__':
 
-    # ----------------------------------------------------------------
-    # CHANGE THESE PARAMETERS FOR YOUR NEEDS--------------------------
-    # ----------------------------------------------------------------
+    Parameters
+    ----------
+    config : dict
+        configuration entries
+
+        'fout' : directory where track data is stored
+        'tlim' : range in filename where time info is stored 
+
+
+    Returns
+    -------
+    mt : ImageTracking Class
+        contains track data as attributes and methods for tracking
+    '''
+
+    # ================================================================
+    # START OF PARAMETER list ========================================
+    # ================================================================
 
 
     # set directory name for track data output .......................
-#    fout = '/vols/talos/home/fabian/data/life_cycles/dust_conv'
-    fout = '/vols/talos/home/fabian/data/life_cycles/case_20150611'
+    fout = config.get('fout', 'test/trackdata')
 
-    # fout = '/home/fabs/TROPOS/data/track'
 
     # indicate the range of string in your filename 
     # where the time information is, e.g. myfile_20120612_1000.png
     # has time information at [7:20] -> tlim = (7, 20)
-#    tlim = (11, 24)
-#    tlim = (13, 28)
-    tlim = (7, 20)
+    tlim = config.get('tlim', (7, 20) )
 
 
     # ================================================================
@@ -41,11 +53,18 @@ if __name__ == '__main__':
 
 
     # select start file  ---------------------------------------------
-    fname = sys.argv[1]
-    fdir = os.path.dirname(fname)
-    fext = os.path.splitext(fname)[1]
+    fdir = os.path.dirname( fname )
+    fbase = os.path.basename( fname )
+    fext = os.path.splitext( fname )[1]
     # ================================================================
 
+
+    # test time string here ------------------------------------------
+    print('PAY ATTENTION!')
+    print('Is this your correct time string? ', fbase[tlim[0]:tlim[1]] )
+    print('... if YES: fine!')
+    print('... if NO: restart tracking with changed tlim')
+    print()
     
     # create file list -----------------------------------------------
     flist = sorted(glob.glob('%s/*%s' % (fdir, fext)))
@@ -77,5 +96,7 @@ if __name__ == '__main__':
 
     mt.load_set(npos, nimg = nimg)
 
-    mt.plot(nimg / 2)
+    mt.plot(nimg // 2)
     # ================================================================
+
+    return mt

@@ -7,10 +7,27 @@ import numpy as np
 import pylab as pl
 import copy
 
-import analysis_tools.grid_and_interpolation as gi
 import matplotlib.widgets
-import io_tools.hdf as hio
+import xarray as xr
 from PIL import Image
+
+######################################################################
+######################################################################
+
+def debug_run(func):
+
+    def func_wrapper(*args, **kwargs):
+
+        try:
+           return func(*args, **kwargs)
+
+        except Exception as e:
+
+            print(e)
+            return None
+
+    return func_wrapper
+
 
 ######################################################################
 ######################################################################
@@ -32,11 +49,13 @@ class ImageTracking(object):
                  trackdata_path = './trackdata' ):
         
         self.flist = flist
+        self.nlist = len( flist )
         self.trackdata_path  =  trackdata_path 
 
         
         # initialization of plotting stuff ...........................
         pl.ion()
+
         self.fig = pl.figure(figsize = (15.5, 12.))
         self.ax =  self.fig.add_subplot(111)
         self.xlim = xlim
@@ -60,25 +79,30 @@ class ImageTracking(object):
         self.tracks = {}
         self.track_number = 0
         self.tlim = tlim
-        
-        
+       
         return
     
 
     # ................................................................
     def plot(self, n):
 
-        print n, self.nmax
-        if n >= self.nmax:
-            dn = n - self.nmax + 1
-            print 'Please wait for loading'
-            self.load_set(self.nend + dn, self.nimg)
-            n = self.nimg / 2 - 1
+        print((n, self.nmax))
 
-        elif n < 0:
-            print 'Please wait for loading'
-            self.load_set(self.nstart + n, self.nimg)
-            n = self.nimg / 2 
+        if (self.nimg == 0): 
+            print('First Image Reached')
+        elif (self.nimg == self.nlist - 1):
+            print('Last Image Reached')
+        else:
+            if n >= self.nmax:
+                dn = n - self.nmax + 1
+                print('Please wait for loading')
+                self.load_set(self.nend + dn, self.nimg)
+                n = self.nimg // 2 - 1
+    
+            elif n < 0:
+                print('Please wait for loading')
+                self.load_set(self.nstart + n, self.nimg)
+                n = self.nimg // 2 
 
         # get name of the next loaded image
         self.nstep = n
@@ -91,7 +115,7 @@ class ImageTracking(object):
         self.timestr = self.basename[t1 : t2]
 
 
-        print '...plotting image number ', self.nstep
+        print(('...plotting image number ', self.nstep))
 
         # get old limits and clean axis
         xlim = self.ax.get_xlim()
@@ -129,11 +153,11 @@ class ImageTracking(object):
 
         # set start and end position in file list ....................
 
-        dn = nimg / 2
+        dn = nimg // 2
         nmax = len(self.flist)
 
-        nstart = np.max( [0,    npos - dn] )
-        nend   = np.min( [nmax, npos + dn + 1] )
+        nstart = int( np.max( [0,    npos - dn] ) )
+        nend   = int( np.min( [nmax, npos + dn + 1] ) )
 
         # get list for loading files ................................. 
         load_list = self.flist[nstart:nend]
@@ -142,7 +166,7 @@ class ImageTracking(object):
 
         rgb_list = []
         for fname in load_list:
-            print fname
+            print(fname)
             img = Image.open(fname)
 
             rgb_list.append(np.array(img))
@@ -170,11 +194,11 @@ class ImageTracking(object):
 
         if event in ['all', 'mouse']:
             self.mouse = self.fig.canvas.mpl_connect(
-                'button_press_event', self.clickevent)
+                    'button_press_event',  self.clickevent  )
 
         if event in ['all', 'key']:
             self.key = self.fig.canvas.mpl_connect(
-                'key_press_event', self.keyevent)
+                    'key_press_event',  self.keyevent  )
 
         return
 
@@ -187,6 +211,7 @@ class ImageTracking(object):
         return
 
     # ................................................................
+    @debug_run
     def clickevent(self, event):
 
 
@@ -201,10 +226,10 @@ class ImageTracking(object):
 
 
     # ................................................................
-
+    @debug_run
     def keyevent(self, event):
 
-        print event.key
+        print((event.key))
 
         if event.key == 'control':
             
@@ -224,11 +249,11 @@ class ImageTracking(object):
 
         elif event.key in ['+']:
             self.page_step *=2
-            print '... new page step:',  self.page_step
+            print(('... new page step:',  self.page_step))
             
         elif event.key in ['-']:
              self.page_step /=2
-             print '... new page step:',  self.page_step
+             print(('... new page step:',  self.page_step))
 
         elif event.key in ['pagedown']:
             self.nstep += self.page_step
@@ -305,7 +330,7 @@ class ImageTracking(object):
 
     def track_list(self):
     
-        ks = self.xs.keys()
+        ks = list(self.xs.keys())
         
         x = []
         y = []
@@ -341,10 +366,10 @@ class ImageTracking(object):
 
         t = self.timestr
 
-        if self.xs.has_key(t):
+        if t in self.xs:
             del self.xs[t]
 
-        if self.ys.has_key(t):
+        if t in self.ys:
             del self.ys[t]
 
         self.draw_track()       
@@ -357,7 +382,7 @@ class ImageTracking(object):
         self.init_track()
         self.draw_track()
         
-        print '...track deleted'
+        print('...track deleted')
         
         return
     # ................................................................    
@@ -368,7 +393,7 @@ class ImageTracking(object):
         self.init_track()    
         self.draw_track()  
         
-        print '...save track'
+        print('...save track')
             
         return 
     # ................................................................
@@ -379,19 +404,26 @@ class ImageTracking(object):
         xs = np.array([ self.xs[t] for t in ts])
         ys = np.array([ self.ys[t] for t in ts])
         
-        out = dict (time = ts, col_index = xs, row_index = ys)
+
+        # make xarray dataset
+        coords       = dict( time = ts )
+        column_index = xr.DataArray(xs, coords = coords, dims = ('time') )
+        row_index    = xr.DataArray(ys, coords = coords, dims = ('time') )
+        track_data   = xr.Dataset( dict( column_index = column_index, 
+                                         row_index = row_index ) ) 
+
         
         t0 = ts[0]
         x0, y0 = xs[0], ys[0]
       
         fdir = self.trackdata_path
-        trackfile = '%s/track_%s_P%.0fx%.0f.h5' % (fdir, t0, x0, y0)
+        trackfile = '%s/track_%s_P%.0fx%.0f.nc' % (fdir, t0, x0, y0)
         self.trackfile = trackfile
 
-        print '... save track data to %s' % trackfile
-        hio.save_dict2hdf(trackfile, out)
+        print(('... save track data to %s' % trackfile))
+        track_data.to_netcdf(trackfile)
 
-        self.tracks[self.track_number] = out
+        self.tracks[self.track_number] = track_data
         self.track_number += 1
     
         return
@@ -406,7 +438,7 @@ class ImageTracking(object):
         t = self.timestr
 
         # actual track point
-        if self.xs.has_key(t):
+        if t in self.xs:
             self.actual.set_data(self.xs[t],self.ys[t])
         else:
             self.actual.set_data([],[]) 
