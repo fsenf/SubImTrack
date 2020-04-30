@@ -20,7 +20,9 @@ mdkir tracking
 ```
 
 ### Via Python Virtual Environment
-It is assumed that your python3 installation contains the `venv` module (see https://docs.python.org/3/library/venv.html). For installing the `subimtrack` package in the separate environment, do: 
+It is assumed that your python3 installation contains the `venv` module 
+(see https://docs.python.org/3/library/venv.html). For installing the 
+`subimtrack` package in the separate environment, do: 
 
 * go to your tracking dir
 ```bash
@@ -37,6 +39,21 @@ source python_env/bin/activate
 pip install numpy matplotlib xarray Image
 ```
 
+* get the repository (good for testing)
+```bash
+git clone 
+```
+
+* locally install it
+```bash
+cd subimtrack
+pip install --upgrade .
+```
 
 
 ## Getting Started
+### Prepare for Image Tracking
+It is assumed that you prepare images (a temporal sequence with a unique identifier for time in the filename, 
+e.g. with the format '%Y%m%d-%H%M) in a separate folder. 
+
+For testing, the `subimtrack` package provides some Meteosat Images 
