@@ -68,3 +68,7 @@ e.g. with the format `%Y%m%d-%H%M`) in a separate folder.
 For testing, the `subimtrack` package provides some Meteosat Images 
 
 
+## Known Bug
+* _Problem_: Resizing the matplotlib window sometimes disconnects the interactive application
+  * Don't resize the window
+* _Problem_: Exception appears when the end / begin of the image stack is approached several times (E. g. keep going to press <Down Arrow> at the end of the image stack)
