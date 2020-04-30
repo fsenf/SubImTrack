@@ -10,8 +10,10 @@
 
 **Why should someone like to track clouds?**
 
-* weather application: Imagine a developing thunderstorms that brings hazards to the regions where it moves along. It would be really good to monitor such dangerous clouds during their evolution.
-* climate science: Clouds reflect sunlight. Thus their lifetime might have an impact on the Earths energy balance.
+* weather application: 
+  * Imagine a developing thunderstorm that brings hazards to the regions where it moves along. It would be really good to monitor such dangerous clouds during their evolution.
+* climate science: 
+  * Clouds reflect sunlight back to space (They appear white in satellite images). Thus their lifetime might have an impact on the Earths energy balance.
 
 The mentioned examples are best done if automated tracking approaches. However, when rearchers start to develop new approaches they need a high quality test data base. It is where `subimtrack` can be used. 
 
@@ -23,7 +25,7 @@ In the following, the steps to install `SubImTrack` are described.
 It is assumed that your tracking activities start at a dedicated directories, e.g. `tracking`
 
 ```bash
-mdkir tracking
+mkdir tracking
 ```
 
 ### Via Python Virtual Environment
@@ -48,12 +50,12 @@ pip install numpy matplotlib xarray Image
 
 * get the repository (good for testing)
 ```bash
-git clone 
+git clone https://github.com/fsenf/SubImTrack.git
 ```
 
 * locally install it
 ```bash
-cd subimtrack
+cd SubImTrack
 pip install --upgrade .
 ```
 
@@ -64,3 +66,5 @@ It is assumed that you prepare images (a temporal sequence with a unique identif
 e.g. with the format `%Y%m%d-%H%M`) in a separate folder. 
 
 For testing, the `subimtrack` package provides some Meteosat Images 
+
+
