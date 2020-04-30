@@ -1,10 +1,16 @@
 # SubImTrack - Python Package for Subjective Image Tracking
 
-Toolset for subjective tracking of features (e.g. clouds) in a stack of images. 
-
 ## Introduction
+`SubImTrack` is a small python toolbox for subjective tracking of features (e.g. clouds) in a stack of images. It runs i a `ipython`shell and let you 
+
+* interactively load a stack of images
+* select cloud track point via Mouse Click in subsequent images
+* and store the resulting track data (time identifier, index positions w.r.t image geometry) in a netcdf file
+
 
 ## Installation
+In the following, the steps to install `SubImTrack` are described.
+
 ### A dedicated place
 It is assumed that your tracking activities start at a dedicated directories, e.g. `tracking`
 
