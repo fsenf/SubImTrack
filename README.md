@@ -1,3 +1,4 @@
+![Example Track](docs/example-track.jpg)
 # SubImTrack - Python Package for Subjective Image Tracking
 
 ## Introduction
