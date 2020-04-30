@@ -8,7 +8,7 @@
 * select cloud track points via Mouse Click in subsequent images
 * and store the resulting track data (time identifier, index positions w.r.t image geometry) in a netcdf file
 
-**Why should someone like to track clouds?
+**Why should someone like to track clouds?**
 
 * weather application: Imagine a developing thunderstorms that brings hazards to the regions where it moves along. It would be really good to monitor such dangerous clouds during their evolution.
 * climate science: Clouds reflect sunlight. Thus their lifetime might have an impact on the Earths energy balance.
@@ -61,6 +61,6 @@ pip install --upgrade .
 ## Getting Started
 ### Prepare for Image Tracking
 It is assumed that you prepare images (a temporal sequence with a unique identifier for time in the filename, 
-e.g. with the format '%Y%m%d-%H%M) in a separate folder. 
+e.g. with the format `%Y%m%d-%H%M`) in a separate folder. 
 
 For testing, the `subimtrack` package provides some Meteosat Images 
