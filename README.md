@@ -5,8 +5,15 @@
 `SubImTrack` is a small python toolbox for subjective tracking of features (e.g. clouds) in a stack of images. It runs i a `ipython`shell and let you 
 
 * interactively load a stack of images
-* select cloud track point via Mouse Click in subsequent images
+* select cloud track points via Mouse Click in subsequent images
 * and store the resulting track data (time identifier, index positions w.r.t image geometry) in a netcdf file
+
+**Why should someone like to track clouds?
+
+* weather application: Imagine a developing thunderstorms that brings hazards to the regions where it moves along. It would be really good to monitor such dangerous clouds during their evolution.
+* climate science: Clouds reflect sunlight. Thus their lifetime might have an impact on the Earths energy balance.
+
+The mentioned examples are best done if automated tracking approaches. However, when rearchers start to develop new approaches they need a high quality test data base. It is where `subimtrack` can be used. 
 
 
 ## Installation
