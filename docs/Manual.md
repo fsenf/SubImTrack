@@ -4,9 +4,9 @@ It is assumed that you have started the image tracking in a `ipython`shell (see 
 ## Explanation of Visualization
 ![Example Track](example-track.jpg)
 
-The example shows you an natural color Meteosat image. The ground is shown in greenish colors, the sea appears dark and clouds are either white or cyanish depending on the amount of cloud ice in the top levels.
+The example shows you an natural color Meteosat image. The ground is shown in greenish colors, the sea would appear dark, and clouds are either white or cyanish depending on the amount of cloud ice in the top levels.
 
-You also see the current track point as **red circles**.
+You also see the current track point as **red circle**.
 
 Moreover, previous and subsequent track points are provided as **white circles**.
 
@@ -46,20 +46,22 @@ The `subimtrack.run`command starts an interactive matplotlib window. You will in
 
 * Tracking
 
-| **Sortcut Keys**   | **Action**  | 
+| **Shortcut Keys**   | **Action**  | 
 |---|---|
 | Arrow Down    |  Next Image |
 | Arrow Up      |  Previous Image |
 | Backspace     |  Remove Track Point |
 
 * Zoom
-| **Sortcut Keys**   | **Action**  | 
+* 
+| **Shortcut Keys**   | **Action**  | 
 |---|---|
 | Strg + Mouse  |  Create a Zoom Window |
 | Esc           |  Reset Zoom to Full Image |
 
 * Experimental (default `nstep = 5`)
-| **Sortcut Keys**   | **Action**  | 
+
+| **Shortcut Keys**   | **Action**  | 
 |---|---|
 | Page Down    |  +`nstep` Next Image  |
 | Page Up      |  -`nstep` Previous Image |
@@ -68,3 +70,26 @@ The `subimtrack.run`command starts an interactive matplotlib window. You will in
 
  
 
+## Throughts on Post-Processing
+Finally, you will have a simplistic set of track data stored. For instance,
+
+```bash
+> ncdump -h SubImTrack/test/tracks/track_20120608T1050Z_P222x397.nc 
+netcdf track_20120608T1050Z_P222x397 {
+dimensions:
+	time = 3 ;
+	string14 = 14 ;
+variables:
+	char time(time, string14) ;
+		time:_Encoding = "utf-8" ;
+	double column_index(time) ;
+		column_index:_FillValue = NaN ;
+	double row_index(time) ;
+		row_index:_FillValue = NaN ;
+}
+```
+
+* `time` : contains your time identifier string which you might need to parse 
+* `column_index`and `row_index` : contain the respective row and column indices as float values
+
+You need to read a geo-reference information that **exactly** fits with your image to translate the indices into longitude and latitude values. 
