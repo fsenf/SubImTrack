@@ -41,6 +41,8 @@ cd tracking
 * create a separate python environment and activate it
 ```bash
 python3 -m venv python_env
+
+# conda deactivate   # you might need to deactivate your conda env
 source python_env/bin/activate
 ```
 
