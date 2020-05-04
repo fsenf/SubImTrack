@@ -48,7 +48,7 @@ source python_env/bin/activate
 
 * install dependencies
 ```bash
-pip install wheel numpy matplotlib xarray Image
+pip install wheel numpy matplotlib xarray Image ipython
 ```
 
 * get the repository (good for testing)
@@ -77,6 +77,22 @@ msevi-20120608T1005Z-hsand-rss-meu.jpg
 msevi-20120608T1010Z-hsand-rss-meu.jpg
 ...
 ```
+
+### Start Tracking on Images
+We start tracking of features in images.
+
+* initialize env and start `ipython`
+```bash
+# conda deactivate   # you might need to deactivate your conda env
+cd tracking
+source python_env/bin/activate
+ipython
+```
+
+* import `subimtrack` package
+
+
+
 
 
 ## Known Bug
