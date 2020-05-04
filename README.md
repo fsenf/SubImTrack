@@ -68,7 +68,15 @@ pip install --upgrade .
 It is assumed that you prepare images (a temporal sequence with a unique identifier for time in the filename, 
 e.g. with the format `%Y%m%d-%H%M`) in a separate folder. 
 
-For testing, the `subimtrack` package provides some Meteosat Images 
+For testing, the `subimtrack` package provides some Meteosat Images. You find the images here:
+
+```bash
+> ls -1 SubImTrack/test/images/
+msevi-20120608T1000Z-hsand-rss-meu.jpg
+msevi-20120608T1005Z-hsand-rss-meu.jpg
+msevi-20120608T1010Z-hsand-rss-meu.jpg
+...
+```
 
 
 ## Known Bug
