@@ -2,7 +2,7 @@
 # SubImTrack - Python Package for Subjective Image Tracking
 
 ## Introduction
-`SubImTrack` is a small python toolbox for subjective tracking of features (e.g. clouds) in a stack of images. It runs i a `ipython`shell and let you 
+`SubImTrack` is a small python toolbox for subjective tracking of features (e.g. clouds) in a stack of images. It runs in an `ipython` shell and let you 
 
 * interactively load a stack of images
 * select cloud track points via Mouse Click in subsequent images
@@ -15,14 +15,14 @@
 * climate science: 
   * Clouds reflect sunlight back to space (They appear white in satellite images). Thus their lifetime might have an impact on the Earths energy balance.
 
-The mentioned examples are best done if automated tracking approaches. However, when rearchers start to develop new approaches they need a high quality test data base. It is where `subimtrack` can be used. 
+The mentioned examples are best done if automated tracking approaches. However, when rearchers start to develop new approaches they need a high quality test data base. For this, `subimtrack` can be used. 
 
 
 ## Installation
 In the following, the steps to install `SubImTrack` are described.
 
 ### A dedicated place
-It is assumed that your tracking activities start at a dedicated directories, e.g. `tracking`
+It is assumed that your tracking activities start at a dedicated directory, e.g. `tracking`
 
 ```bash
 mkdir tracking
@@ -37,6 +37,7 @@ It is assumed that your python3 installation contains the `venv` module
 ```bash
 cd tracking
 ```
+
 * create a separate python environment and activate it
 ```bash
 python3 -m venv python_env
