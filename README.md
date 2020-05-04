@@ -134,7 +134,7 @@ Out[4]: <subimtrack.ImageTracking.ImageTracking at 0x7f09b559a828>
 
 ```
 
-
+You should see a window that pops up and shows your image. You can interact with the image window to perform your subjective tracking. See [docs/Manual.md](docs/Manual.md).
 
 
 ## Known Bug
