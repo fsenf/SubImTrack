@@ -90,7 +90,47 @@ ipython
 ```
 
 * import `subimtrack` package
+```ipython
+In [1]: import subimtrack                                                                                                                         
+```
 
+* configure tracking
+```ipython
+In [2]: config = dict( fout = 'SubImTrack//test/tracks/', tlim = (6,20))                                                                          
+```
+  * `fout` : keyword to set the output path for track files (in netcdf format)
+  * `tlim` : tuple setting start and end index of the time identifier in the filename 
+    (see message when tracking is started) 
+
+* set filename of the start image
+```ipython
+In [3]: start_image  = 'SubImTrack//test/images/msevi-20120608T1100Z-hsand-rss-meu.jpg'                                                           
+```
+
+* start the tracking
+```ipython
+In [4]: subimtrack.run( config, start_image)                                                                                                      
+PAY ATTENTION!
+Is this your correct time string?  20120608T1100Z
+... if YES: fine!
+... if NO: restart tracking with changed tlim
+
+SubImTrack//test/images/msevi-20120608T1035Z-hsand-rss-meu.jpg
+SubImTrack//test/images/msevi-20120608T1040Z-hsand-rss-meu.jpg
+SubImTrack//test/images/msevi-20120608T1045Z-hsand-rss-meu.jpg
+SubImTrack//test/images/msevi-20120608T1050Z-hsand-rss-meu.jpg
+SubImTrack//test/images/msevi-20120608T1055Z-hsand-rss-meu.jpg
+SubImTrack//test/images/msevi-20120608T1100Z-hsand-rss-meu.jpg
+SubImTrack//test/images/msevi-20120608T1105Z-hsand-rss-meu.jpg
+SubImTrack//test/images/msevi-20120608T1110Z-hsand-rss-meu.jpg
+SubImTrack//test/images/msevi-20120608T1115Z-hsand-rss-meu.jpg
+SubImTrack//test/images/msevi-20120608T1120Z-hsand-rss-meu.jpg
+SubImTrack//test/images/msevi-20120608T1125Z-hsand-rss-meu.jpg
+(5, 11)
+('...plotting image number ', 5)
+Out[4]: <subimtrack.ImageTracking.ImageTracking at 0x7f09b559a828>
+
+```
 
 
 
