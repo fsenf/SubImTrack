@@ -48,7 +48,7 @@ source python_env/bin/activate
 
 * install dependencies
 ```bash
-pip install numpy matplotlib xarray Image
+pip install wheel numpy matplotlib xarray Image
 ```
 
 * get the repository (good for testing)
