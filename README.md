@@ -98,9 +98,11 @@ In [1]: import subimtrack
 ```ipython
 In [2]: config = dict( fout = 'SubImTrack//test/tracks/', tlim = (6,20))                                                                          
 ```
-  * `fout` : keyword to set the output path for track files (in netcdf format)
-  * `tlim` : tuple setting start and end index of the time identifier in the filename 
-    (see message when tracking is started) 
+
+* keywords:
+  * `fout` : `string`, output path for track files (in netcdf format)
+  * `tlim` : `tuple`, setting start and end index of the time identifier in the filename (see message when tracking is started) 
+             
 
 * set filename of the start image
 ```ipython
