@@ -1,4 +1,4 @@
-# A short Manual on `subimtrack`
+# A Short Manual on `subimtrack`
 It is assumed that you have started the image tracking in a `ipython`shell (see Getting Started in [Readme](../Readme.md)).
 
 ## Explanation of Visualization
@@ -53,7 +53,7 @@ The `subimtrack.run`command starts an interactive matplotlib window. You will in
 | Backspace     |  Remove Track Point |
 
 * Zoom
-* 
+
 | **Shortcut Keys**   | **Action**  | 
 |---|---|
 | Strg + Mouse  |  Create a Zoom Window |
@@ -88,7 +88,7 @@ variables:
 		row_index:_FillValue = NaN ;
 }
 ```
-
+* the filename contains the start point information 
 * `time` : contains your time identifier string which you might need to parse 
 * `column_index`and `row_index` : contain the respective row and column indices as float values
 
