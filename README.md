@@ -48,7 +48,7 @@ source python_env/bin/activate
 
 * install dependencies
 ```bash
-pip install wheel numpy matplotlib xarray Image ipython netCDF4-python
+pip install wheel numpy matplotlib xarray Image ipython netCDF4
 ```
 
 * get the repository (good for testing)
