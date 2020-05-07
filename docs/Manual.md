@@ -56,7 +56,7 @@ The `subimtrack.run`command starts an interactive matplotlib window. You will in
 
 | **Shortcut Keys**   | **Action**  | 
 |---|---|
-| Strg + Mouse  |  Create a Zoom Window |
+| Strg + Hold Left Mouse Button  |  Create a Zoom Window |
 | Esc           |  Reset Zoom to Full Image |
 
 * Experimental (default `nstep = 5`)
