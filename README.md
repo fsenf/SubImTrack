@@ -15,7 +15,7 @@
 * climate science: 
   * Clouds reflect sunlight back to space (They appear white in satellite images). Thus their lifetime might have an impact on the Earths energy balance.
 
-The mentioned examples are best done if automated tracking approaches. However, when rearchers start to develop new approaches they need a high quality test data base. For this, `subimtrack` can be used. 
+The mentioned examples are best done if automated tracking approaches. However, when researchers start to develop new approaches they need a high quality test data base. For this, `subimtrack` can be used. 
 
 
 ## Installation
@@ -48,7 +48,7 @@ source python_env/bin/activate
 
 * install dependencies
 ```bash
-pip install wheel numpy matplotlib xarray Image ipython
+pip install wheel numpy matplotlib xarray Image ipython netCDF4-python
 ```
 
 * get the repository (good for testing)
@@ -141,3 +141,4 @@ You should see a window that pops up and shows your image. You can interact with
 * _Problem_: Resizing the matplotlib window sometimes disconnects the interactive application
   * Don't resize the window
 * _Problem_: Exception appears when the end / begin of the image stack is approached several times (E. g. keep going to press <Down Arrow> at the end of the image stack)
+ * _Problem_: Zoom might not properly work on MAC
